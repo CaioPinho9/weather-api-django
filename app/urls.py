@@ -20,6 +20,7 @@ from rest_framework import routers
 
 from forecast.api import viewsets as dailyviewsets
 from forecast.api import viewsets as hourlyviewsets
+from forecast import views
 
 route = routers.DefaultRouter()
 
@@ -36,4 +37,8 @@ route.register(
 )
 
 
-urlpatterns = [path("admin/", admin.site.urls), path("", include(route.urls))]
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include(route.urls)),
+    path("", views.index),
+]
