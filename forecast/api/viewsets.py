@@ -1,7 +1,8 @@
-from rest_framework import status, viewsets
+from rest_framework import viewsets
+from rest_framework import status
+from rest_framework.response import Response
 from forecast.api import serializers
 from forecast import models
-from rest_framework.response import Response
 
 from forecast.api.view_utils import view_utils
 
@@ -16,7 +17,6 @@ class DailyViewSet(viewsets.ModelViewSet):
             serializers.DailySerializer(queryset, many=True), "daily"
         )
         return json
-
 
 class HourlyViewSet(viewsets.ModelViewSet):
     def list(self, request):

@@ -15,12 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from multiprocessing import Process
 
 from rest_framework import routers
 
 from forecast.api import viewsets as dailyviewsets
 from forecast.api import viewsets as hourlyviewsets
+
+from forecast.api.open_weather_api import get_open_weather_data
 from forecast import views
+
+p = Process(target=get_open_weather_data)
+p.start()
 
 route = routers.DefaultRouter()
 

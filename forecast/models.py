@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Daily(models.Model):
-    id = models.IntegerField(primary_key=True, editable=False, null=False)
+    id = models.AutoField(primary_key=True)
     city_name = models.CharField(max_length=255)
     state_name = models.CharField(max_length=255)
     date = models.DateTimeField()
@@ -16,12 +16,14 @@ class Daily(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["city_name", "date"], name="city_date_daily")
+            models.UniqueConstraint(
+                fields=["city_name", "date"], name="city_date_daily"
+            )
         ]
 
 
 class Hourly(models.Model):
-    id = models.IntegerField(primary_key=True, editable=False, null=False)
+    id = models.AutoField(primary_key=True)
     city_name = models.CharField(max_length=255)
     state_name = models.CharField(max_length=255)
     date = models.DateTimeField()
@@ -31,5 +33,7 @@ class Hourly(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["city_name", "date"], name="city_date_hourly")
+            models.UniqueConstraint(
+                fields=["city_name", "date"], name="city_date_hourly"
+            )
         ]

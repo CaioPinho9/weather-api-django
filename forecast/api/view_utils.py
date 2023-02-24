@@ -1,6 +1,7 @@
 import datetime
 from django.http import JsonResponse
 
+
 class view_utils:
     def format_params(request):
         start_date = request.data.get("start_date")
@@ -81,7 +82,9 @@ class view_utils:
         for data in list_model_weather.data:
             city_name = data["city_name"]
             state_name = data["state_name"]
-            date = data["date"]
+            date = datetime.datetime.strptime(
+                data["date"], "%Y-%m-%dT%H:%M:%S"
+            ).strftime("%Y-%m-%d %H:%M:%S")
             temp = data["temp"]
             humidity = data["humidity"]
             rain = data["rain"]
@@ -107,7 +110,7 @@ class view_utils:
                 dates = weather_dict["cities"][-1]["dates"]
                 dates.append(
                     {
-                        "date": datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%d %H:%M:%S'),
+                        "date": date,
                         "temp": temp,
                         "humidity": humidity,
                         "rain": rain,
